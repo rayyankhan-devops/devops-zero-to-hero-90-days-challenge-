@@ -180,9 +180,10 @@ tail -n 100 -f /var/log/nginx/error.log
 
 ---
 
-### 👤 Author
+### 👤 Author / Contact
 * **Muhammad Rayyan**
 * *Future DevOps Engineer in Progress* 👑
+* [GitHub](https://github.com/rayyankhan-devops) | [LinkedIn](https://www.linkedin.com/in/muhammad-rayyan-5645b1317/) | [Email](mailto:rkkhan0750@gmail.com)
 
 ---
 

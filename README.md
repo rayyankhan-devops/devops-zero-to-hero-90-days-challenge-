@@ -54,10 +54,10 @@ cd devops-zero-to-hero-90-days-challenge-
 ## 💡 Motto
 > **"Discipline Today, Success Tomorrow."**
 
-### 👤 Author
+### 👤 Author / Contact
 * **Muhammad Rayyan**
 * *Future DevOps Engineer in Progress* 👑
-* [GitHub Profile](https://github.com/rayyankhan-devops)
+* [GitHub](https://github.com/rayyankhan-devops) | [LinkedIn](https://www.linkedin.com/in/muhammad-rayyan-5645b1317/) | [Email](mailto:rkkhan0750@gmail.com)
 
 ---
 *Follow along as I post daily updates and project implementations!*
