@@ -4,67 +4,68 @@ On Day 3, I leveled up my Linux administration skills by exploring powerful text
 
 ---
 
-## 1. AWK - Pattern Scanning & Processing Language
+## 1. AWK - Pattern Scanning & Processing Language (In-Depth)
 
-`awk` is an extremely powerful text-processing programming language used for data extraction and reporting. It processes files line by line, split into fields (delimited by spaces/tabs by default).
+`awk` is an interpreted programming language designed for text processing, data extraction, and reporting. It treats files as a collection of records (lines) and fields (columns).
 
-### Example Dataset (`users.txt`)
-| USER | AGE | CITY |
-| :--- | :--- | :--- |
-| `rayyan` | 22 | Peshawar |
-| `alice` | 24 | London |
-| `bob` | 23 | Berlin |
+### AWK Special Variables (Interview-Critical)
+* **`$0`**: Represents the entire current line.
+* **`$1, $2, ... $N`**: Represents the 1st, 2nd, ... N-th field of the line.
+* **`NF`**: **Number of Fields** in the current record. Useful for targeting the last column (`$NF`).
+* **`NR`**: **Number of Records** (the current line number, 1-indexed).
+* **`FS`**: **Field Separator** (input delimiter; defaults to space or tab).
+* **`OFS`**: **Output Field Separator** (output delimiter when fields are joined with commas; defaults to space).
 
-### Practical Examples
-* **Print specific column:**
+### Advanced AWK Interview Scripts
+* **Print usernames and shell details from `/etc/passwd` (colon separated):**
   ```bash
-  awk '{print $1}' users.txt
-  # Outputs only the first column (Usernames)
+  awk -F: '{print "User: " $1 "\t Shell: " $NF}' /etc/passwd
+  # Splits by ":" (-F:) and prints column 1 and the last column ($NF)
   ```
-* **Print using custom delimiter:**
+* **Filter files larger than 10MB in a list:**
   ```bash
-  awk -F: '{print $1}' /etc/passwd
-  # Splits by ":" and prints the system usernames
+  ls -lh | awk '$5 ~ /[0-9]+M/ && $5 > 10 {print $9, $5}'
+  # Matches column 5 (size) containing "M" and checks if value is greater than 10
   ```
-* **Filter disk usage information:**
+* **Calculate the total memory or storage column sum:**
   ```bash
-  df -hT | awk 'NR>1 {print $1, $7}'
-  # Skips the header row (NR>1) and prints partition name ($1) and mount point ($7)
+  df -h | awk 'NR>1 {sum += $3} END {print "Total Used: " sum "G"}'
+  # Skips header, aggregates column 3 (Used space), and prints the sum at the end
   ```
 
 ---
 
-## 2. GREP - Global Regular Expression Print
+## 2. GREP - Global Regular Expression Print (In-Depth)
 
-`grep` is a command-line utility used to search text or output for lines that match a specific regular expression or pattern.
+`grep` processes text line-by-line and filters lines that match a regular expression pattern.
 
-### Practical Examples
-* **Standard search:**
+### Advanced Flags & Context Searching
+In production log analysis, you often need to see the context around an error.
+* **`-A N` (After):** Print `N` lines of trailing context after matching lines.
+* **`-B N` (Before):** Print `N` lines of leading context before matching lines.
+* **`-C N` (Context):** Print `N` lines of context before and after matching lines.
+
+### Practical Troubleshooting Scenarios
+* **Find error logs with 3 lines of context around it:**
   ```bash
-  grep "error" app.log
-  # Finds all occurrences of the word "error" inside app.log
+  grep -C 3 "NullPointerException" catalina.out
   ```
-* **Case-insensitive search:**
+* **Exclude comments and empty lines from configuration files (Interview Gold):**
   ```bash
-  grep -i "failed" syslog
-  # Finds "failed", "FAILED", "Failed", etc.
+  grep -Ev "^#|^$" /etc/nginx/nginx.conf
+  # -E activates Extended Regex. "^#" matches comments. "^$" matches empty lines. -v inverts the match.
   ```
-* **Pipelines with grep:**
+* **Search directories recursively for matching IPs:**
   ```bash
-  ps aux | grep nginx
-  # Finds the running nginx process details from system processes
-  ```
-* **Extended Regular Expressions:**
-  ```bash
-  grep -E "(ssh|sshd)" /etc/ssh/sshd_config
-  # Matches either "ssh" or "sshd" using extended regex (-E)
+  grep -rnE "[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}" /var/log/nginx/
+  # -r recursive, -n shows line numbers, -E uses regex for IP address matching.
   ```
 
 ---
 
 ## 3. Disk Management using LVM (Logical Volume Manager)
 
-LVM provides filesystem flexibility, allowing disk partitions to be resized, added, or removed dynamically without system downtime.
+Logical Volume Manager (LVM) provides a high-level abstraction layer over raw physical storage devices. It allows administrators to dynamically resize and manage filesystems without rebooting or unmounting partitions.
 
 ### LVM Architecture Flow
 
@@ -80,38 +81,107 @@ graph LR
     LV2 --> FS2["XFS Filesystem"]
 ```
 
-* **Physical Volume (PV):** Actual raw block devices, physical disks, or partitions (e.g. `/dev/xvdb`).
-* **Volume Group (VG):** A storage pool created by combining one or more Physical Volumes.
-* **Logical Volume (LV):** Virtual partitions carved out from a Volume Group, which can then be formatted with a filesystem.
-
-### LVM Commands Walkthrough
-
-| Step | Command | Description |
-| :--- | :--- | :--- |
-| **1** | `lsblk` | List all block devices and check storage attachments. |
-| **2** | `sudo fdisk -l` | List partition details and disk properties. |
-| **3** | `sudo pvcreate /dev/xvdb` | Initialize `/dev/xvdb` as a Physical Volume (PV). |
-| **4** | `sudo vgcreate vgdata /dev/xvdb` | Create a Volume Group (VG) named `vgdata` containing `/dev/xvdb`. |
-| **5** | `sudo lvcreate -L 5G -n lvdata vgdata` | Carve a 5GB Logical Volume (LV) named `lvdata` out of `vgdata`. |
-| **6** | `sudo mkfs.ext4 /dev/vgdata/lvdata` | Format the logical volume with the `ext4` filesystem. |
-| **7** | `sudo mount /dev/vgdata/lvdata /mnt/data` | Mount the logical volume to the mount point `/mnt/data`. |
-| **8** | `df -h` | Verify the file system is mounted and check available disk space. |
+### The LVM Objects Explained
+1. **Physical Volume (PV):** Represents a raw disk or partition initialized by LVM (e.g. `/dev/xvdb`, `/dev/sdb1`).
+2. **Volume Group (VG):** A virtual pool of storage constructed by pooling multiple Physical Volumes. You can add disks to a VG to expand its capacity.
+3. **Logical Volume (LV):** A virtual partition created from the VG pool. You format this volume with a filesystem and mount it for applications to use.
 
 ---
 
-## 4. AWS EC2 - Hands-on Storage Management
+## 4. A–Z LVM Operations Guide (Lifecycle Commands)
 
-I practiced attaching and mounting additional volumes dynamically:
-1. **Launched Instance:** Started an Amazon Linux 2 EC2 instance.
-2. **EBS Volume:** Created a 10GB Elastic Block Store (EBS) volume and attached it as `/dev/xvdb`.
-3. **Applied LVM:** Created a PV, VG, and LV using the steps detailed above.
-4. **Mounted Storage:** Created a folder at `/mnt/data` and mounted the filesystem.
-5. **Cleaned up:** Unmounted the filesystem and cleaned up AWS resources to avoid billing.
+### Phase A: Setup LVM from Scratch
+* **Scan for block devices:**
+  ```bash
+  lsblk
+  ```
+* **Initialize physical volume (PV):**
+  ```bash
+  sudo pvcreate /dev/xvdb
+  ```
+* **Create volume group (VG):**
+  ```bash
+  sudo vgcreate vgdata /dev/xvdb
+  ```
+* **Create logical volume (LV):**
+  ```bash
+  sudo lvcreate -L 5G -n lvdata vgdata
+  # -L specifies size (e.g., 5G). -n specifies name. "vgdata" is the source VG.
+  ```
+* **Create filesystem:**
+  ```bash
+  sudo mkfs.ext4 /dev/vgdata/lvdata
+  ```
+* **Mount filesystem:**
+  ```bash
+  sudo mkdir -p /mnt/data
+  sudo mount /dev/vgdata/lvdata /mnt/data
+  ```
+
+### Phase B: Utility / Monitoring Commands
+* **`pvdisplay` / `pvs`:** Displays details (size, free space, VG mapping) of Physical Volumes.
+* **`vgdisplay` / `vgs`:** Displays Volume Group properties (extent size, physical/logical volume count, free extents).
+* **`lvdisplay` / `lvs`:** Displays Logical Volume path, status, UUID, and sizes.
+
+### Phase C: Dynamically Extend LVM (No Downtime)
+If your mount point `/mnt/data` is running out of space, follow this sequence to expand it live:
+
+```mermaid
+graph TD
+    A[Add new disk or resize EBS] --> B[Scan SCSI host for new disk]
+    B --> C[pvcreate new disk]
+    C --> D[vgextend to add PV to VG]
+    D --> E[lvextend to grow LV size]
+    E --> F[Resize Filesystem online]
+```
+
+1. **Scan for a new physical disk without rebooting the server:**
+   ```bash
+   echo "- - -" | sudo tee /sys/class/scsi_host/host0/scan
+   # Scans SCSI controllers for hot-plugged hard drives
+   ```
+2. **Initialize new disk `/dev/xvdc` as PV:**
+   ```bash
+   sudo pvcreate /dev/xvdc
+   ```
+3. **Extend the existing Volume Group (`vgdata`) with the new PV:**
+   ```bash
+   sudo vgextend vgdata /dev/xvdc
+   ```
+4. **Extend the Logical Volume (`lvdata`) by adding 5GB:**
+   ```bash
+   sudo lvextend -L +5G /dev/vgdata/lvdata
+   # Or use -l +100%FREE to consume all remaining unallocated space in VG
+   ```
+5. **Resize the filesystem to match the new LV boundaries (Crucial step!):**
+   * **For Ext4 Filesystem:**
+     ```bash
+     sudo resize2fs /dev/vgdata/lvdata
+     ```
+   * **For XFS Filesystem:**
+     ```bash
+     sudo xfs_growfs /mnt/data
+     # Note: xfs_growfs takes the mount point path as its argument
+     ```
 
 ---
 
-## 💡 Key Takeaway
-> **"Tools are powerful, but practice makes them perfect. Small steps everyday lead to big progress forever!"**
+## 🎓 Interview Questions & Answers
+
+### Q1: What is the difference between standard partitioning (like fdisk) and LVM?
+- Standard partitions have fixed sizes. Resizing them requires unmounting, deleting the partition, re-creating it with a larger cylinder count, running checks, and re-mounting (causing downtime).
+- LVM abstracts hardware. It allows you to create pool-based storage, extend logical volumes across multiple physical hard drives online (without downtime), and take file system snapshots.
+
+### Q2: How do you verify what filesystem is mounted on a directory?
+Use `df -T` or run the `findmnt` command:
+```bash
+df -T /mnt/data
+# Outputs partition type (e.g., ext4, xfs, nfs)
+```
+
+### Q3: What is the difference between `resize2fs` and `xfs_growfs`?
+- `resize2fs` is used specifically to resize Ext2, Ext3, and Ext4 filesystems. It accepts the block device path.
+- `xfs_growfs` is used to expand XFS filesystems. It accepts the active mount directory path, and the filesystem must be mounted to grow it.
 
 ---
 
@@ -121,4 +191,4 @@ I practiced attaching and mounting additional volumes dynamically:
 
 ---
 
-* [← Day 2: Linux Basics](../day-02-linux-basics/README.md) | [Home](../README.md)
+* [← Day 2: Linux Basics](../day-02-linux-basics/README.md) | [Home](../README.md) | [Day 4: Python & Shell Scripting →](../day-04-python-scripting-permissions/README.md)
