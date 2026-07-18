@@ -4,6 +4,11 @@ On Day 3, I leveled up my Linux administration skills by exploring powerful text
 
 ---
 
+## 📝 Day 3 Notes (Visual)
+![Day 3 Notes](day-03-notes.png)
+
+---
+
 ## 1. AWK - Pattern Scanning & Processing Language (In-Depth)
 
 `awk` is an interpreted programming language designed for text processing, data extraction, and reporting. It treats files as a collection of records (lines) and fields (columns).

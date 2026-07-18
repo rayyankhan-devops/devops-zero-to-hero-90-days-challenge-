@@ -4,6 +4,11 @@ On Day 4, I took another step forward in my DevOps journey by studying the core 
 
 ---
 
+## 📝 Day 4 Notes (Visual)
+![Day 4 Notes](day-04-notes.png)
+
+---
+
 ## 1. Python Basics for DevOps
 
 Python is highly readable and comes with massive library support, making it the preferred language for complex cloud automation, writing CLI tools, interacting with cloud APIs (using libraries like `boto3` for AWS), and creating API backends.

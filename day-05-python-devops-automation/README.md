@@ -4,6 +4,11 @@ On Day 5, I continued my journey into Python scripting for DevOps, focusing on h
 
 ---
 
+## 📝 Day 5 Notes (Visual)
+![Day 5 Notes](day-05-notes.png)
+
+---
+
 ## 1. Why Python is Crucial in DevOps
 
 While Bash is excellent for single system commands and brief scripts, Python is widely adopted for scaling automations. It reduces manual work across several domains:
@@ -61,16 +66,16 @@ Used when the number of iterations is known beforehand.
   # Output: 0, 1, 2, 3, 4
   ```
 
-* **DevOps Iteration Example (Checking Servers):**
+* **DevOps Example:**
   ```python
   servers = ["server1", "server2", "server3"]
   for server in servers:
-      print("Checking status of", server)
+      print("Checking", server)
   
   # Output:
-  # Checking status of server1
-  # Checking status of server2
-  # Checking status of server3
+  # Checking server1
+  # Checking server2
+  # Checking server3
   ```
 
 ### B. `while` Loop
@@ -101,13 +106,13 @@ welcome()
 # Output: Welcome to DevOps
 ```
 
-### B. Parameterized Function (Package installer template)
+### B. Function with Parameters
 ```python
 def install_package(package):
-    print(f"Installing package: {package}")
+    print("Installing", package)
 
 install_package("nginx")
-# Output: Installing package: nginx
+# Output: Installing nginx
 ```
 
 ---
@@ -140,24 +145,24 @@ DevOps engineers must know when to use Python scripts and when to use Shell scri
   os.system("sudo apt install nginx -y")
   ```
 
-* **Equivalent Shell Script (`install_nginx.sh`):**
+* **Equivalent Shell Script:**
   ```bash
   #!/bin/bash
   echo "Installing nginx..."
   sudo apt update
   sudo apt install nginx -y
-  echo "Installation completed successfully."
+  echo "Installation completed"
   ```
 
 ### B. Iterative Tasks (Pinging Servers)
 
-* **Bash Loop Script (`ping_servers.sh`):**
+* **Automation using Loops in Scripts (Bash For Loop):**
   ```bash
   #!/bin/bash
-  servers="server1.domain.com server2.domain.com server3.domain.com"
+  servers="server1 server2 server3"
   for s in $servers; do
-      echo "Pinging server: $s"
-      ping -c 2 "$s"
+      echo "Pinging $s";
+      ping -c 2 $s;
   done
   ```
 
@@ -188,10 +193,9 @@ Cron is a system service in Unix-like OSes that runs scheduled scripts in the ba
 +----------------- Minute (0 - 59)
 ```
 
-* **Example scheduling:**
-  Run the Python server backup script every day at 2:00 AM:
+* **Example:** Run script every day at 2 AM:
   ```text
-  0 2 * * * /usr/bin/python3 /home/rayyan/backup.py
+  0 2 * * * /home/rayyan/backup.sh
   ```
 
 ---

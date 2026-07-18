@@ -4,6 +4,11 @@ Welcome to **Day 1** of my 90 Days of DevOps journey! Today marks the official b
 
 ---
 
+## 📝 Day 1 Notes (Visual)
+![Day 1 Notes](day-01-notes.png)
+
+---
+
 ## 🎯 What is this Challenge?
 
 I am committing to **90 days of DevOps**—learning, building, and improving every single day. The goal is to develop a strong foundation in modern infrastructure, automation, cloud computing, and developer operations.

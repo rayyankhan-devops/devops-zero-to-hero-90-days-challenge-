@@ -4,6 +4,11 @@ On Day 2, I focused on the foundations. DevOps relies heavily on Linux systems, 
 
 ---
 
+## 📝 Day 2 Notes (Visual)
+![Day 2 Notes](day-02-notes.png)
+
+---
+
 ## 1. UNIX vs. Linux
 
 Understanding the origin of operating systems helps in recognizing the design decisions behind modern environments.
