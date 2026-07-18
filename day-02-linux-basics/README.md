@@ -9,6 +9,21 @@ On Day 2, I focused on the foundations. DevOps relies heavily on Linux systems, 
 
 ---
 
+> [!NOTE]
+> **Day 2 Summary (Social Media Caption):**
+> Day 2 of my 90 Days of DevOps journey is officially in the books! 🚀
+> 
+> Today was all about building a strong foundation. As the note says, "Consistency Today, Success Tomorrow," and I'm thrilled to be taking these small steps to build a solid base.
+> 
+> **Here’s a quick breakdown of what I tackled today:**
+> * **🐧 UNIX & Linux Basics:** Exploring the core architecture—from the OS and Kernel down to the Boot Loader.
+> * **💻 Command Line Mastery:** Getting hands-on with essential Linux commands (ls, cd, chmod, grep, etc.) to navigate the terminal efficiently.
+> * **🔐 Secure Shell (SSH):** Understanding secure remote server access and managing connections.
+> * **🔑 SSH Keys:** Generating and configuring Public & Private key pairs for secure authentication.
+> * **☁️ AWS EC2:** Launched my very first EC2 instance on AWS and successfully connected to it!
+
+---
+
 ## 1. UNIX vs. Linux
 
 Understanding the origin of operating systems helps in recognizing the design decisions behind modern environments.

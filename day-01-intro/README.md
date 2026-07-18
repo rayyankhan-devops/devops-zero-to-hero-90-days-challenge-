@@ -9,6 +9,20 @@ Welcome to **Day 1** of my 90 Days of DevOps journey! Today marks the official b
 
 ---
 
+> [!NOTE]
+> **Day 1 Summary (Social Media Caption):**
+> Today, I'm officially starting my **#90DaysOfDevOps** challenge. For the next 90 days, I'll be learning, building real-world projects, and sharing my progress publicly.
+> 
+> **🎯 Why am I doing this?**
+> * Build strong DevOps fundamentals
+> * Gain hands-on AWS, Docker, Kubernetes, Linux, CI/CD, Terraform & more
+> * Stay consistent every single day
+> * Become industry-ready
+> 
+> *This journey isn't about being perfect—it's about showing up every day and getting 1% better.*
+
+---
+
 ## 🎯 What is this Challenge?
 
 I am committing to **90 days of DevOps**—learning, building, and improving every single day. The goal is to develop a strong foundation in modern infrastructure, automation, cloud computing, and developer operations.

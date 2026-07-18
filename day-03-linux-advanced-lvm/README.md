@@ -1,11 +1,25 @@
 # 🛠️ Day 3: Advanced Linux Tools & Disk Management (LVM)
 
-On Day 3, I leveled up my Linux administration skills by exploring powerful text processing tools (`awk` and `grep`) and advanced storage/disk management using Logical Volume Manager (LVM) on AWS EC2.
+On Day 3, I leveled up my Linux administration skills by exploring powerful text processing tools (`awk` and `grep`), user management, and advanced storage/disk management using Logical Volume Manager (LVM) on AWS EC2.
 
 ---
 
 ## 📝 Day 3 Notes (Visual)
 ![Day 3 Notes](day-03-notes.png)
+
+---
+
+> [!NOTE]
+> **Day 3 Summary (Social Media Caption):**
+> Day 3 of my 90 Days of DevOps journey is complete! 
+> 
+> As I head into the final stretch of my software engineering degree, bridging the gap between writing code and managing infrastructure is a major priority. Today was an incredibly productive deep dive into Linux fundamentals and AWS storage.
+> 
+> **Here is a look at what I practiced and built today:**
+> * **🔍 Text Automation:** Mastered `awk` and `grep` for powerful pattern scanning, text processing, and log filtering.
+> * **👥 User & Permission Management:** Got comfortable managing Linux users, groups, and understanding ownership (`chmod`, `chown`).
+> * **💽 Disk Management (LVM):** Explored the flexibility of Logical Volume Management by configuring Physical Volumes, Volume Groups, and Logical Volumes.
+> * **☁️ AWS EC2 & EBS:** Successfully launched an Amazon Linux 2 instance, attached an EBS volume, mounted the filesystem, and safely cleaned up the resources.
 
 ---
 
@@ -68,7 +82,53 @@ In production log analysis, you often need to see the context around an error.
 
 ---
 
-## 3. Disk Management using LVM (Logical Volume Manager)
+## 3. User & Group Management (Interview-Ready)
+
+Managing system users and groups is fundamental to maintaining permissions and access control inside servers.
+
+### Core User Administration Commands
+* **Create a user:**
+  ```bash
+  sudo useradd -m rayyan
+  # -m automatically creates the home directory (/home/rayyan)
+  ```
+* **Set password for a user:**
+  ```bash
+  sudo passwd rayyan
+  ```
+* **Delete a user:**
+  ```bash
+  sudo userdel -r rayyan
+  # -r removes the user's home directory and mail spool
+  ```
+
+### Group Administration Commands
+* **Create a new group:**
+  ```bash
+  sudo groupadd devops
+  ```
+* **Add a user to a group:**
+  ```bash
+  sudo usermod -aG devops rayyan
+  # -aG appends user to supplemental group(s). Always use -a (append) to avoid removing user from other groups.
+  ```
+* **Verify user identities and group mappings:**
+  ```bash
+  id rayyan
+  # Prints UID, GID, and list of all groups the user belongs to
+  ```
+  ```bash
+  groups rayyan
+  ```
+
+### Essential Security Configuration Files
+* **`/etc/passwd`:** Contains user details (Username, UID, GID, home directory path, and login shell).
+* **`/etc/group`:** Contains group information and membership lists.
+* **`/etc/shadow`:** Stores encrypted user passwords and password expiration settings (restricted access for security).
+
+---
+
+## 4. Disk Management using LVM (Logical Volume Manager)
 
 Logical Volume Manager (LVM) provides a high-level abstraction layer over raw physical storage devices. It allows administrators to dynamically resize and manage filesystems without rebooting or unmounting partitions.
 
@@ -93,7 +153,7 @@ graph LR
 
 ---
 
-## 4. A–Z LVM Operations Guide (Lifecycle Commands)
+## 5. A–Z LVM Operations Guide (Lifecycle Commands)
 
 ### Phase A: Setup LVM from Scratch
 * **Scan for block devices:**
@@ -168,6 +228,17 @@ graph TD
      sudo xfs_growfs /mnt/data
      # Note: xfs_growfs takes the mount point path as its argument
      ```
+
+---
+
+## 6. AWS EC2 & EBS Storage Management (Hands-on)
+
+I practiced attaching and mounting additional volumes dynamically:
+1. **Launched Instance:** Started an Amazon Linux 2 EC2 instance.
+2. **EBS Volume:** Created a 10GB Elastic Block Store (EBS) volume and attached it as `/dev/xvdb`.
+3. **Applied LVM:** Created a PV, VG, and LV using the steps detailed above.
+4. **Mounted Storage:** Created a folder at `/mnt/data` and mounted the filesystem.
+5. **Cleaned up:** Unmounted the filesystem and cleaned up AWS resources to avoid billing.
 
 ---
 
