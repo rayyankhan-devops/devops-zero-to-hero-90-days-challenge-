@@ -1,0 +1,9 @@
+2026-07-20 08:00:12 [INFO] Application started on port 8080
+2026-07-20 08:00:15 [DEBUG] Connecting to postgres database host: db-prod-01
+2026-07-20 08:00:17 [INFO] Database connection established
+2026-07-20 08:05:33 [WARNING] High CPU usage detected: 78% on core 0
+2026-07-20 08:10:44 [ERROR] NullPointerException in UserAccountController: line 42
+2026-07-20 08:10:44 [DEBUG] stacktrace details: controller validation failed
+2026-07-20 08:10:45 [INFO] Request routed to fallback failover server
+2026-07-20 08:15:00 [ERROR] Connection timed out: API gateway unavailable
+2026-07-20 08:20:10 [INFO] Heartbeat status check: OK

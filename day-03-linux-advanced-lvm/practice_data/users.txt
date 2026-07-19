@@ -1,0 +1,7 @@
+USER:AGE:CITY:ROLE
+rayyan:22:Peshawar:DevOps
+alice:24:London:Developer
+bob:23:Berlin:SysAdmin
+charlie:28:Paris:Manager
+diana:21:Tokyo:Intern
+eva:30:NewYork:Architect

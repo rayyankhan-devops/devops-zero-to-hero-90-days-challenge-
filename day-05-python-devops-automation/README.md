@@ -209,6 +209,29 @@ Cron is a system service in Unix-like OSes that runs scheduled scripts in the ba
   ```text
   0 2 * * * /home/rayyan/backup.sh
   ```
+---
+
+## 🛠️ Executable Practice Scripts
+
+I have created actual, runnable automation code templates inside this folder to practice system operations and dependency checking:
+
+### A. Python Systems Automation
+* **Server Status Auditor:** [server_checker.py](server_checker.py) (uses `subprocess.run` to check connection states of a host array)
+* **Package Manager Installer:** [package_installer.py](package_installer.py) (dynamic privilege checks and installs system packages using apt-get/yum/brew)
+* **How to run them:**
+  ```bash
+  python3 server_checker.py
+  python3 package_installer.py
+  ```
+
+### B. Shell Scripting Automation
+* **Server Ping Loop:** [ping_servers_loop.sh](ping_servers_loop.sh) (iterates over an array of IP addresses to test response reachability)
+* **Nginx Installer:** [install_nginx.sh](install_nginx.sh) (provisions Nginx service with root access safeguards)
+* **How to run them:**
+  ```bash
+  ./ping_servers_loop.sh
+  sudo ./install_nginx.sh
+  ```
 
 ---
 

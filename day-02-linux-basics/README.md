@@ -176,6 +176,18 @@ Launched a virtual server in the cloud (EC2 - Elastic Compute Cloud) on AWS:
 2. **Select Instance Type:** Chose the hardware specifications (e.g., `t2.micro` for free tier).
 3. **Configure Security Group:** Opened inbound port `22` to allow SSH access.
 4. **Review & Launch:** Configured the storage, generated keys, and launched the instance.
+---
+
+## 🛠️ Executable Practice Script: `system_info.sh`
+
+I have created an automated system audit script inside this folder to practice system state auditing. It prints core hardware and OS metrics.
+
+* **Script Location:** [system_info.sh](system_info.sh)
+* **To run the script:**
+  ```bash
+  chmod +x system_info.sh
+  ./system_info.sh
+  ```
 
 ---
 

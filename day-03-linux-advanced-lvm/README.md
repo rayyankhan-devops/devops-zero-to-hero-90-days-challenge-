@@ -239,6 +239,28 @@ I practiced attaching and mounting additional volumes dynamically:
 3. **Applied LVM:** Created a PV, VG, and LV using the steps detailed above.
 4. **Mounted Storage:** Created a folder at `/mnt/data` and mounted the filesystem.
 5. **Cleaned up:** Unmounted the filesystem and cleaned up AWS resources to avoid billing.
+---
+
+## 🛠️ Executable Practice Scripts
+
+I have created actual practice scripts and databases inside this directory to get hands-on experience with log processing and volume diagnostics:
+
+### A. Text Filtering Practice
+* **Sample Data Folder:** [practice_data/](practice_data/) (contains `users.txt` and `app.log`)
+* **Filtering Script:** [run_text_filters.sh](run_text_filters.sh) (runs multiple grep/awk filters)
+* **To run the script:**
+  ```bash
+  chmod +x run_text_filters.sh
+  ./run_text_filters.sh
+  ```
+
+### B. LVM Status Auditing
+* **LVM Script:** [lvm_status.sh](lvm_status.sh) (displays active PV, VG, and LV configurations)
+* **To run the script (requires root privileges):**
+  ```bash
+  chmod +x lvm_status.sh
+  sudo ./lvm_status.sh
+  ```
 
 ---
 

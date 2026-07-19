@@ -191,6 +191,28 @@ File Type (- = regular file, d = directory)
     ```text
     30 16 * * 0 /opt/cleanup.sh
     ```
+---
+
+## 🛠️ Executable Practice Scripts
+
+I have created actual, runnable code templates inside this folder to practice scripting logic and Linux file permissions:
+
+### A. Python & Shell Logic Demos
+* **Python Script:** [check_age.py](check_age.py) (uses `try-except` blocks for safe type conversions)
+* **Shell Script:** [check_age.sh](check_age.sh) (uses standard bash regex for numeric validation checks)
+* **How to run them:**
+  ```bash
+  python3 check_age.py
+  ./check_age.sh
+  ```
+
+### B. Octal Permissions Demo
+* **Permissions Script:** [permission_fixer.sh](permission_fixer.sh) (demonstrates standard chmod values like 644, 700, and 755 dynamically)
+* **How to run it:**
+  ```bash
+  chmod +x permission_fixer.sh
+  ./permission_fixer.sh
+  ```
 
 ---
 

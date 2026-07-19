@@ -202,6 +202,29 @@ Cron is a system service in Linux that automates shell script execution.
   ```text
   */5 * * * * /home/ec2-user/website-monitor.sh
   ```
+---
+
+## 🛠️ Executable Practice Scripts
+
+I have created actual, runnable production-grade automation scripts inside this folder to practice system backups and server checks:
+
+### A. System Backup Script
+* **Backup Tool:** [backup.sh](backup.sh) (uses strict exit flags, creates compressed tarballs, cleans logs, and removes archives older than 7 days)
+* **To run the script:**
+  ```bash
+  chmod +x backup.sh
+  ./backup.sh [source_directory] [backup_directory]
+  ```
+
+### B. Network & Service Monitoring
+* **Website Auditor:** [website_monitor.sh](website_monitor.sh) (resolves HTTP response codes using curl, with logging options)
+* **Disk Space Monitor:** [disk_monitor.sh](disk_monitor.sh) (checks storage capacity and flags high utilization)
+* **To run the scripts:**
+  ```bash
+  chmod +x website_monitor.sh disk_monitor.sh
+  ./website_monitor.sh [url] [email]
+  ./disk_monitor.sh [threshold_percent] [email]
+  ```
 
 ---
 
