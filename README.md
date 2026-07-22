@@ -18,7 +18,8 @@ Below is the structured path of the 90 Days DevOps Challenge. Active days are li
 | **Day 06** | [Networking, AWS VPC & Shell Scripting Projects](day-06-networking-vpc-scripting/README.md) | ✅ Completed |
 | **Day 07** | [Networking Fundamentals, OSI Model & Python Basics](day-07-networking-python-basics/README.md) | ✅ Completed |
 | **Day 08** | [Network Security, System Design & Python APIs](day-08-network-security-apis/README.md) | ✅ Completed |
-| **Day 09-90** | Containers (Docker), Orchestration (Kubernetes), CI/CD (GitHub Actions, Jenkins), IaC (Terraform), Configuration Management (Ansible), Monitoring (Prometheus & Grafana), and Cloud Native Projects. | ⏳ Upcoming |
+| **Day 09** | [Git, GitHub & AWS Python Automation](day-09-git-aws-automation/README.md) | ✅ Completed |
+| **Day 10-90** | Containers (Docker), Orchestration (Kubernetes), CI/CD (GitHub Actions, Jenkins), IaC (Terraform), Configuration Management (Ansible), Monitoring (Prometheus & Grafana), and Cloud Native Projects. | ⏳ Upcoming |
 
 ---
 
@@ -43,7 +44,9 @@ devops-zero-to-hero-90-days-challenge/
 │   └── README.md
 ├── day-07-networking-python-basics/     # Day 7: Networking Fundamentals, OSI Model & Python Basics
 │   └── README.md
-└── day-08-network-security-apis/        # Day 8: Network Security, System Design & Python APIs
+├── day-08-network-security-apis/        # Day 8: Network Security, System Design & Python APIs
+│   └── README.md
+└── day-09-git-aws-automation/           # Day 9: Git, GitHub & AWS Python Automation
     └── README.md
 ```
 
