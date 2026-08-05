@@ -1,0 +1,29 @@
+# Git & Version Control
+.git
+.gitignore
+
+# Docker configuration files
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation & IDE
+README.md
+*.md
+.vscode
+.idea
+.DS_Store
+
+# Local Binaries and Build Artifacts
+go-with-maria-db
+server
+bin/
+dist/
+
+# Local database persistent volumes
+mariadb_data/
+mysql_data/
+
+# Environment files
+.env
+.env.local

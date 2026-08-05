@@ -19,7 +19,32 @@ Below is the structured path of the 90 Days DevOps Challenge. Active days are li
 | **Day 07** | [Networking Fundamentals, OSI Model & Python Basics](day-07-networking-python-basics/README.md) | ✅ Completed |
 | **Day 08** | [Network Security, System Design & Python APIs](day-08-network-security-apis/README.md) | ✅ Completed |
 | **Day 09** | [Git, GitHub & AWS Python Automation](day-09-git-aws-automation/README.md) | ✅ Completed |
-| **Day 10-90** | Containers (Docker), Orchestration (Kubernetes), CI/CD (GitHub Actions, Jenkins), IaC (Terraform), Configuration Management (Ansible), Monitoring (Prometheus & Grafana), and Cloud Native Projects. | ⏳ Upcoming |
+| **Day 10** | [Git Advanced, AWS Cloud Fundamentals & Python OOP](day-10-git-aws-python-oop/README.md) | ✅ Completed |
+| **Day 11** | [DevSecOps Fundamentals, OWASP Threat Dragon & GitHub Security](day-11-devsecops-github-security/README.md) | ✅ Completed |
+| **Day 12** | [Advanced Git & AWS EC2, IAM and S3](day-12-git-aws-ec2-iam-s3/README.md) | ✅ Completed |
+| **Day 13** | [DevSecOps Pipeline, Security Automation & Python Projects](day-13-devsecops-pipeline-python-projects/README.md) | ✅ Completed |
+| **Day 14** | [DevOps, Jira Project Management & Python OOP Learning](day-14-jira-sdlc-python-oop/README.md) | ✅ Completed |
+| **Day 15** | [AWS EC2, Auto Scaling, Load Balancer & S3 Static Website Hosting](day-15-aws-ec2-asg-alb-s3/README.md) | ✅ Completed |
+| **Day 16** | [GitOps with Jira, AWS Auto Scaling & Amazon RDS](day-16-gitops-jira-asg-rds/README.md) | ✅ Completed |
+| **Day 17** | [Docker Fundamentals & AWS NoSQL Database](day-17-docker-basics-dynamodb/README.md) | ✅ Completed |
+| **Day 18** | [SAST, SCA & SonarQube (Manual Code Analysis)](day-18-sast-sca-sonarqube/README.md) | ✅ Completed |
+| **Day 19** | [Docker Deep-Dive, Storage Volumes & Networking](day-19-docker-volumes-networking/README.md) | ✅ Completed |
+| **Day 20** | [Dockerizing a 3-Tier Microservices Application & Docker Scout](day-20-3tier-docker-scout/README.md) | ✅ Completed |
+| **Day 21** | [Dockerfiles & Best Practices (ChatApp & Go-MariaDB Projects)](day-21-dockerfiles-best-practices/README.md) | ✅ Completed |
+| **Day 22** | [Docker Compose & Microservices Stack (DevBoard Project)](day-22-docker-compose-devboard/README.md) | ✅ Completed |
+| **Day 23-90** | Orchestration (Kubernetes, Helm), CI/CD (GitHub Actions, Jenkins), IaC (Terraform), Configuration Management (Ansible), Monitoring (Prometheus & Grafana), and Cloud Native Projects. | ⏳ Upcoming |
+
+---
+
+## 🎯 Master Interview Preparation (300 Scenario-Based Questions)
+
+Check out the dedicated [DevOps Interview Preparation Guide](devops-interview-preperation/README.md) containing 300 real-world scenario questions and troubleshooting guides across 6 core domains:
+* 🐧 [Linux Systems & Storage Administration (50 Qs)](devops-interview-preperation/01-linux-scenario-interview-questions.md)
+* 📜 [Bash Shell Scripting & Automation (50 Qs)](devops-interview-preperation/02-bash-scripting-scenario-interview-questions.md)
+* 🌐 [Networking, Firewalls & Security (50 Qs)](devops-interview-preperation/03-networking-security-scenario-interview-questions.md)
+* 🐙 [Git, GitHub & DevSecOps Pipelines (50 Qs)](devops-interview-preperation/04-git-devsecops-scenario-interview-questions.md)
+* ☁️ [AWS Cloud Infrastructure & Automation (50 Qs)](devops-interview-preperation/05-aws-cloud-scenario-interview-questions.md)
+* 🐳 [Docker Containerization & Microservices (50 Qs)](devops-interview-preperation/06-docker-containers-scenario-interview-questions.md)
 
 ---
 
@@ -29,25 +54,33 @@ Below is the structured path of the 90 Days DevOps Challenge. Active days are li
 devops-zero-to-hero-90-days-challenge/
 ├── .gitignore                           # Git ignore file (excludes raw image assets)
 ├── README.md                            # Main roadmap and challenge progress tracker
-├── assets/                              # Contains visual notes and infographics (ignored in Git)
+├── assets/                              # Visual notes and infographics
+├── devops-interview-preperation/        # 300 Real-World Scenario Interview Q&As
 ├── day-01-intro/                        # Day 1: Goals and Commitment
-│   └── README.md
 ├── day-02-linux-basics/                 # Day 2: Foundational Linux Commands, SSH & Keypairs
-│   └── README.md
 ├── day-03-linux-advanced-lvm/           # Day 3: AWK, GREP, and Logical Volume Manager (LVM)
-│   └── README.md
 ├── day-04-python-scripting-permissions/ # Day 4: Python Scripting, Shell Scripting & Permissions
-│   └── README.md
 ├── day-05-python-devops-automation/     # Day 5: Python for DevOps, Automation & Cron Jobs
-│   └── README.md
 ├── day-06-networking-vpc-scripting/     # Day 6: Networking, AWS VPC & Shell Scripting Projects
-│   └── README.md
 ├── day-07-networking-python-basics/     # Day 7: Networking Fundamentals, OSI Model & Python Basics
-│   └── README.md
 ├── day-08-network-security-apis/        # Day 8: Network Security, System Design & Python APIs
-│   └── README.md
-└── day-09-git-aws-automation/           # Day 9: Git, GitHub & AWS Python Automation
-    └── README.md
+├── day-09-git-aws-automation/           # Day 9: Git, GitHub & AWS Python Automation
+├── day-10-git-aws-python-oop/           # Day 10: Git Advanced, AWS Cloud Fundamentals & Python OOP
+├── day-11-devsecops-github-security/    # Day 11: DevSecOps Fundamentals, OWASP & GitHub Security
+├── day-12-git-aws-ec2-iam-s3/           # Day 12: Advanced Git & AWS EC2, IAM and S3
+├── day-13-devsecops-pipeline-python-projects/ # Day 13: DevSecOps Pipeline & Security Automation
+├── day-14-jira-sdlc-python-oop/         # Day 14: DevOps, Jira Project Management & Python OOP
+├── day-15-aws-ec2-asg-alb-s3/           # Day 15: AWS EC2, Auto Scaling, Load Balancer & S3
+├── day-16-gitops-jira-asg-rds/           # Day 16: GitOps with Jira, AWS Auto Scaling & RDS
+├── day-17-docker-basics-dynamodb/       # Day 17: Docker Fundamentals & AWS DynamoDB
+├── day-18-sast-sca-sonarqube/           # Day 18: SAST, SCA & SonarQube Inspection
+├── day-19-docker-volumes-networking/    # Day 19: Docker Storage Volumes & Custom Networking
+├── day-20-3tier-docker-scout/           # Day 20: 3-Tier Microservices Containerization & Scout
+├── day-21-dockerfiles-best-practices/   # Day 21: Dockerfile Optimization & Hands-on Projects
+│   ├── chatApp-go-with-react-postgres/  # WebSocket Chat app microservice stack
+│   └── go-with-maria-db/                # Go microservice with MariaDB
+└── day-22-docker-compose-devboard/      # Day 22: Docker Compose & Microservices
+    └── devboard/                        # DevBoard Stack (Nginx, React, Go API, Postgres)
 ```
 
 ---
@@ -72,4 +105,5 @@ cd devops-zero-to-hero-90-days-challenge-
 * [GitHub](https://github.com/rayyankhan-devops) | [LinkedIn](https://www.linkedin.com/in/muhammad-rayyan-5645b1317/) | [Email](mailto:rkkhan0750@gmail.com)
 
 ---
+
 *Follow along as I post daily updates and project implementations!*

@@ -1,0 +1,32 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Images / Screenshots
+*.png
+*.jpg
+*.jpeg
+*.gif
+
+# Node.js / React
+node_modules/
+frontend/node_modules/
+frontend/dist/
+npm-debug.log*
+
+# Go binaries
+server
+backend/server
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Environment files (local secrets)
+# Keep .env.example files committed!
+.env
+backend/.env
+frontend/.env.local

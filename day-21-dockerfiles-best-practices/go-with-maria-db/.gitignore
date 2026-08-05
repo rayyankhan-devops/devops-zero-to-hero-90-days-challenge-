@@ -1,0 +1,41 @@
+# Go Binaries and Executables
+go-with-maria-db
+server
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Go Test & Build Output
+*.test
+bin/
+dist/
+
+# Environment and Secret Files
+.env
+.env.local
+.env.*.local
+
+# IDE & OS Specific Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local MariaDB Volume Data
+mariadb_data/
+mysql_data/
+
+# Media & Screenshots
+*.png
+*.jpg
+*.jpeg
+*.svg
