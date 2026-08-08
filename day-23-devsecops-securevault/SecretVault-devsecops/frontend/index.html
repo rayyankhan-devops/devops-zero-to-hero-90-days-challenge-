@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="SecureVault — A secure notes and task management app built for DevSecOps demonstration with SonarQube SAST & SCA integration."
+    />
+    <title>SecureVault | Secure Notes & Task Manager</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ─────────── AUTH SCREEN ─────────── -->
+    <div id="auth-screen" class="auth-screen">
+      <div class="auth-bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+      </div>
+
+      <div class="auth-card">
+        <!-- Logo -->
+        <div class="auth-logo">
+          <div class="logo-icon">
+            <i data-lucide="shield-check"></i>
+          </div>
+          <span class="logo-text">SecureVault</span>
+        </div>
+        <p class="auth-subtitle">DevSecOps Demo — Secure Notes & Task Manager</p>
+
+        <!-- Tab Switcher -->
+        <div class="auth-tabs">
+          <button id="tab-login" class="auth-tab active" onclick="switchTab('login')">Login</button>
+          <button id="tab-register" class="auth-tab" onclick="switchTab('register')">Register</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="login-form" class="auth-form" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="login-identifier">Username or Email</label>
+            <div class="input-wrapper">
+              <i data-lucide="user" class="input-icon"></i>
+              <input
+                type="text"
+                id="login-identifier"
+                placeholder="Enter username or email"
+                autocomplete="username"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <div class="input-wrapper">
+              <i data-lucide="lock" class="input-icon"></i>
+              <input
+                type="password"
+                id="login-password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              />
+              <button type="button" class="toggle-password" onclick="togglePassword('login-password')">
+                <i data-lucide="eye" id="login-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div id="login-error" class="auth-error hidden"></div>
+          <button type="submit" id="login-btn" class="btn btn-primary btn-full">
+            <span class="btn-text">Sign In</span>
+            <div class="btn-spinner hidden"></div>
+          </button>
+        </form>
+
+        <!-- REGISTER FORM -->
+        <form id="register-form" class="auth-form hidden" onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label for="reg-username">Username</label>
+            <div class="input-wrapper">
+              <i data-lucide="user" class="input-icon"></i>
+              <input type="text" id="reg-username" placeholder="Choose a username" autocomplete="username" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Email</label>
+            <div class="input-wrapper">
+              <i data-lucide="mail" class="input-icon"></i>
+              <input type="email" id="reg-email" placeholder="your@email.com" autocomplete="email" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="reg-password">Password</label>
+            <div class="input-wrapper">
+              <i data-lucide="lock" class="input-icon"></i>
+              <input
+                type="password"
+                id="reg-password"
+                placeholder="Min. 6 characters"
+                autocomplete="new-password"
+                required
+              />
+              <button type="button" class="toggle-password" onclick="togglePassword('reg-password')">
+                <i data-lucide="eye" id="reg-eye"></i>
+              </button>
+            </div>
+          </div>
+          <div id="reg-error" class="auth-error hidden"></div>
+          <button type="submit" id="register-btn" class="btn btn-primary btn-full">
+            <span class="btn-text">Create Account</span>
+            <div class="btn-spinner hidden"></div>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ─────────── APP SCREEN ─────────── -->
+    <div id="app-screen" class="app-screen hidden">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="logo-icon small">
+            <i data-lucide="shield-check"></i>
+          </div>
+          <span class="logo-text">SecureVault</span>
+          <button class="sidebar-close" id="sidebar-close-btn" onclick="toggleSidebar()">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button class="nav-item active" id="nav-dashboard" onclick="navigate('dashboard')">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Dashboard</span>
+          </button>
+          <button class="nav-item" id="nav-notes" onclick="navigate('notes')">
+            <i data-lucide="sticky-note"></i>
+            <span>Notes</span>
+          </button>
+          <button class="nav-item" id="nav-tasks" onclick="navigate('tasks')">
+            <i data-lucide="check-square"></i>
+            <span>Tasks</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="user-badge">
+            <div class="user-avatar" id="sidebar-avatar">U</div>
+            <div class="user-info">
+              <span class="user-name" id="sidebar-username">User</span>
+              <span class="user-email" id="sidebar-email">user@email.com</span>
+            </div>
+          </div>
+          <button class="btn-icon" id="logout-btn" onclick="logout()" title="Logout">
+            <i data-lucide="log-out"></i>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content" id="main-content">
+        <!-- Top Bar -->
+        <header class="topbar">
+          <button class="btn-icon sidebar-toggle" onclick="toggleSidebar()">
+            <i data-lucide="menu"></i>
+          </button>
+          <div class="topbar-title" id="topbar-title">Dashboard</div>
+          <div class="topbar-actions" id="topbar-actions"></div>
+        </header>
+
+        <!-- ── DASHBOARD PAGE ── -->
+        <section id="page-dashboard" class="page active">
+          <div class="page-header">
+            <h1 id="dashboard-greeting">Good morning! 👋</h1>
+            <p class="page-subtitle">Here's your overview for today</p>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card accent-blue">
+              <div class="stat-icon"><i data-lucide="check-square"></i></div>
+              <div class="stat-info">
+                <span class="stat-value" id="stat-total">0</span>
+                <span class="stat-label">Total Tasks</span>
+              </div>
+            </div>
+            <div class="stat-card accent-amber">
+              <div class="stat-icon"><i data-lucide="clock"></i></div>
+              <div class="stat-info">
+                <span class="stat-value" id="stat-todo">0</span>
+                <span class="stat-label">To Do</span>
+              </div>
+            </div>
+            <div class="stat-card accent-violet">
+              <div class="stat-icon"><i data-lucide="loader"></i></div>
+              <div class="stat-info">
+                <span class="stat-value" id="stat-inprogress">0</span>
+                <span class="stat-label">In Progress</span>
+              </div>
+            </div>
+            <div class="stat-card accent-emerald">
+              <div class="stat-icon"><i data-lucide="check-circle"></i></div>
+              <div class="stat-info">
+                <span class="stat-value" id="stat-done">0</span>
+                <span class="stat-label">Completed</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <!-- Recent Notes -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h2>Recent Notes</h2>
+                <button class="btn btn-ghost btn-sm" onclick="navigate('notes')">View all</button>
+              </div>
+              <div id="recent-notes-list" class="recent-list">
+                <div class="empty-state-sm">
+                  <i data-lucide="sticky-note"></i>
+                  <p>No notes yet</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- High Priority Tasks -->
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h2>High Priority Tasks</h2>
+                <button class="btn btn-ghost btn-sm" onclick="navigate('tasks')">View all</button>
+              </div>
+              <div id="priority-tasks-list" class="recent-list">
+                <div class="empty-state-sm">
+                  <i data-lucide="alert-circle"></i>
+                  <p>No high priority tasks</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── NOTES PAGE ── -->
+        <section id="page-notes" class="page hidden">
+          <div class="page-header">
+            <div>
+              <h1>My Notes</h1>
+              <p class="page-subtitle">Keep your thoughts secure and organized</p>
+            </div>
+            <button class="btn btn-primary" onclick="openNoteModal()">
+              <i data-lucide="plus"></i>
+              New Note
+            </button>
+          </div>
+
+          <div class="search-bar">
+            <i data-lucide="search" class="search-icon"></i>
+            <input
+              type="text"
+              id="notes-search"
+              placeholder="Search notes..."
+              oninput="filterNotes(this.value)"
+            />
+          </div>
+
+          <div class="notes-grid" id="notes-grid">
+            <div class="notes-empty hidden" id="notes-empty">
+              <i data-lucide="sticky-note"></i>
+              <h3>No notes yet</h3>
+              <p>Create your first secure note to get started</p>
+              <button class="btn btn-primary" onclick="openNoteModal()">
+                <i data-lucide="plus"></i> Create Note
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── TASKS PAGE ── -->
+        <section id="page-tasks" class="page hidden">
+          <div class="page-header">
+            <div>
+              <h1>My Tasks</h1>
+              <p class="page-subtitle">Track your work with priority & status</p>
+            </div>
+            <button class="btn btn-primary" onclick="openTaskModal()">
+              <i data-lucide="plus"></i>
+              New Task
+            </button>
+          </div>
+
+          <!-- Filter Tabs -->
+          <div class="filter-tabs" id="task-filters">
+            <button class="filter-tab active" data-status="all" onclick="filterTasks('all')">All</button>
+            <button class="filter-tab" data-status="todo" onclick="filterTasks('todo')">To Do</button>
+            <button class="filter-tab" data-status="in_progress" onclick="filterTasks('in_progress')">In Progress</button>
+            <button class="filter-tab" data-status="done" onclick="filterTasks('done')">Done</button>
+          </div>
+
+          <div class="tasks-list" id="tasks-list">
+            <div class="tasks-empty hidden" id="tasks-empty">
+              <i data-lucide="check-square"></i>
+              <h3>No tasks yet</h3>
+              <p>Create your first task to start tracking your work</p>
+              <button class="btn btn-primary" onclick="openTaskModal()">
+                <i data-lucide="plus"></i> Create Task
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- ─────────── MODAL: Note ─────────── -->
+    <div id="note-modal" class="modal-overlay hidden" onclick="closeNoteModal(event)">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="note-modal-title">New Note</h2>
+          <button class="btn-icon" onclick="closeNoteModal()"><i data-lucide="x"></i></button>
+        </div>
+        <form onsubmit="saveNote(event)" id="note-form">
+          <input type="hidden" id="note-id" value="" />
+          <div class="form-group">
+            <label for="note-title">Title</label>
+            <input type="text" id="note-title" placeholder="Note title..." required />
+          </div>
+          <div class="form-group">
+            <label for="note-content">Content</label>
+            <textarea id="note-content" rows="6" placeholder="Write your secure note here..." required></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label>Color Tag</label>
+              <div class="color-picker" id="note-color-picker">
+                <button type="button" class="color-dot active" data-color="default" style="background: var(--color-surface-2)" onclick="selectColor('default', this)"></button>
+                <button type="button" class="color-dot" data-color="blue" style="background: #3b82f6" onclick="selectColor('blue', this)"></button>
+                <button type="button" class="color-dot" data-color="emerald" style="background: #10b981" onclick="selectColor('emerald', this)"></button>
+                <button type="button" class="color-dot" data-color="amber" style="background: #f59e0b" onclick="selectColor('amber', this)"></button>
+                <button type="button" class="color-dot" data-color="rose" style="background: #f43f5e" onclick="selectColor('rose', this)"></button>
+                <button type="button" class="color-dot" data-color="violet" style="background: #8b5cf6" onclick="selectColor('violet', this)"></button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="checkbox" id="note-pinned" />
+                Pin this note
+              </label>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-ghost" onclick="closeNoteModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Note</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ─────────── MODAL: Task ─────────── -->
+    <div id="task-modal" class="modal-overlay hidden" onclick="closeTaskModal(event)">
+      <div class="modal">
+        <div class="modal-header">
+          <h2 id="task-modal-title">New Task</h2>
+          <button class="btn-icon" onclick="closeTaskModal()"><i data-lucide="x"></i></button>
+        </div>
+        <form onsubmit="saveTask(event)" id="task-form">
+          <input type="hidden" id="task-id" value="" />
+          <div class="form-group">
+            <label for="task-title">Title</label>
+            <input type="text" id="task-title" placeholder="Task title..." required />
+          </div>
+          <div class="form-group">
+            <label for="task-description">Description</label>
+            <textarea id="task-description" rows="3" placeholder="Optional task description..."></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="task-status">Status</label>
+              <select id="task-status">
+                <option value="todo">To Do</option>
+                <option value="in_progress">In Progress</option>
+                <option value="done">Done</option>
+              </select>
+            </div>
+            <div class="form-group flex-1">
+              <label for="task-priority">Priority</label>
+              <select id="task-priority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="task-due-date">Due Date (optional)</label>
+            <input type="datetime-local" id="task-due-date" />
+          </div>
+          <div class="modal-actions">
+            <button type="button" class="btn btn-ghost" onclick="closeTaskModal()">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ─────────── TOAST ─────────── -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- ─────────── CONFIRM DIALOG ─────────── -->
+    <div id="confirm-dialog" class="modal-overlay hidden" onclick="cancelConfirm(event)">
+      <div class="modal modal-sm">
+        <div class="modal-header">
+          <h2>Confirm Delete</h2>
+        </div>
+        <p id="confirm-message" class="confirm-message">Are you sure you want to delete this?</p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" onclick="cancelConfirm()">Cancel</button>
+          <button type="button" class="btn btn-danger" id="confirm-action-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

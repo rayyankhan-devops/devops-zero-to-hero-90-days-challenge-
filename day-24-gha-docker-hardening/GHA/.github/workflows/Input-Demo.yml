@@ -1,0 +1,25 @@
+name: Input-Demo
+on: 
+  workflow_dispatch:
+    inputs:
+      enviroment:
+        description: Please enter the Environment
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - test
+          - prod
+      arficate-tag:
+        description: choose teh git tag to deploy
+        required: true
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Env
+        run: echo "App ${{ inputs.arficate-tag }} running in a ${{ inputs.enviroment }}"
+
+      
+      

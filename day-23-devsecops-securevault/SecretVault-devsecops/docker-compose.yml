@@ -1,0 +1,197 @@
+# List all networks our application containers will use to talk to each other
+networks:
+  # Define our shared network named 'securevault'
+  securevault:
+    # Use the existing Docker network created on your machine so services connect smoothly
+    external: true
+
+# List persistent storage folders (volumes) so our database data is saved even if containers stop
+volumes:
+  # Define a storage volume for our database
+  postgres_data:
+    # Give the storage volume a clear name on your computer
+    name: securevault_postgres_data
+
+# Define all the application containers (services) that make up SecretVault
+services:
+  # -------------------------------------------------------------
+  # 1. PostgreSQL Database Container
+  # -------------------------------------------------------------
+  db:
+    # Use the official small PostgreSQL 16 image built on Alpine Linux
+    image: postgres:16-alpine
+    # Name the container 'securevault-db' so other services can find it on the network
+    container_name: securevault-db
+    # Set configuration settings for the database
+    environment:
+      # Database username
+      - POSTGRES_USER=secureuser
+      # Database password
+      - POSTGRES_PASSWORD=securepassword
+      # Database name
+      - POSTGRES_DB=securevault
+    # Open port 5432 on your computer so database tools can connect
+    ports:
+      - "5432:5432"
+    # Attach our storage volume so database tables are saved permanently
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # Connect this container to our 'securevault' network
+    networks:
+      - securevault
+    # Check if PostgreSQL is ready to accept connections
+    healthcheck:
+      # Command to test if PostgreSQL is accepting logins
+      test: ["CMD-SHELL", "pg_isready -U secureuser -d securevault"]
+      # Check every 10 seconds
+      interval: 10s
+      # Wait 5 seconds for a response
+      timeout: 5s
+      # Try 5 times before giving up
+      retries: 5
+    # Automatically restart the container if it crashes
+    restart: unless-stopped
+
+  # -------------------------------------------------------------
+  # 2. Auth Service Container (Handles Logins & Registrations)
+  # -------------------------------------------------------------
+  auth:
+    # How to build the Auth image
+    build:
+      # Use current main folder as build location
+      context: .
+      # Use the Dockerfile inside services/auth/
+      dockerfile: services/auth/Dockerfile
+    # Name and tag the built image
+    image: secretvault-auth:v1.0.0
+    # Name the container 'secretvault-auth'
+    container_name: secretvault-auth
+    # Open port 5001 on your computer
+    ports:
+      - "5001:5001"
+    # Pass settings to the Auth app
+    environment:
+      # Run in production mode
+      - APP_ENV=production
+      # Secret key used for creating secure user login tokens
+      - SECRET_KEY=dev-secret-change-in-production
+      # Salt string used for scrambling user passwords securely
+      - PASSWORD_SALT=securevault-salt
+      # Tells the app how to connect to our PostgreSQL database container
+      - DATABASE_URL=postgresql+psycopg://secureuser:securepassword@securevault-db:5432/securevault
+    # Connect to the 'securevault' network
+    networks:
+      - securevault
+    # Dependencies rules
+    depends_on:
+      # Wait for the PostgreSQL database container to be healthy before starting Auth
+      db:
+        condition: service_healthy
+    # Automatically restart if it stops unexpectedly
+    restart: unless-stopped
+
+  # -------------------------------------------------------------
+  # 3. Notes Service Container (Handles User Notes)
+  # -------------------------------------------------------------
+  notes:
+    # How to build the Notes image
+    build:
+      # Main directory context
+      context: .
+      # Path to Notes Dockerfile
+      dockerfile: services/notes/Dockerfile
+    # Name and tag the image
+    image: secretvault-notes:v1.0.0
+    # Name the container 'secretvault-notes'
+    container_name: secretvault-notes
+    # Open port 5002 on your computer
+    ports:
+      - "5002:5002"
+    # Settings for Notes service
+    environment:
+      # Run in production mode
+      - APP_ENV=production
+      # Secret key for verifying login tokens
+      - SECRET_KEY=dev-secret-change-in-production
+      # Connection link to the PostgreSQL database container
+      - DATABASE_URL=postgresql+psycopg://secureuser:securepassword@securevault-db:5432/securevault
+    # Connect to the 'securevault' network
+    networks:
+      - securevault
+    # Dependency rules
+    depends_on:
+      # Wait for database to be ready
+      db:
+        condition: service_healthy
+      # Wait for Auth service to start
+      auth:
+        condition: service_started
+    # Automatically restart if it stops
+    restart: unless-stopped
+
+  # -------------------------------------------------------------
+  # 4. Tasks Service Container (Handles User To-Do Tasks)
+  # -------------------------------------------------------------
+  tasks:
+    # How to build the Tasks image
+    build:
+      # Main directory context
+      context: .
+      # Path to Tasks Dockerfile
+      dockerfile: services/tasks/Dockerfile
+    # Name and tag the image
+    image: secretvault-tasks:v1.0.0
+    # Name the container 'secretvault-tasks'
+    container_name: secretvault-tasks
+    # Open port 5003 on your computer
+    ports:
+      - "5003:5003"
+    # Settings for Tasks service
+    environment:
+      # Run in production mode
+      - APP_ENV=production
+      # Secret key for verifying login tokens
+      - SECRET_KEY=dev-secret-change-in-production
+      # Connection link to the PostgreSQL database container
+      - DATABASE_URL=postgresql+psycopg://secureuser:securepassword@securevault-db:5432/securevault
+    # Connect to the 'securevault' network
+    networks:
+      - securevault
+    # Dependency rules
+    depends_on:
+      # Wait for database to be ready
+      db:
+        condition: service_healthy
+      # Wait for Auth service to start
+      auth:
+        condition: service_started
+    # Automatically restart if it stops
+    restart: unless-stopped
+
+  # -------------------------------------------------------------
+  # 5. Frontend Service Container (User Interface Website)
+  # -------------------------------------------------------------
+  frontend:
+    # How to build the Frontend image
+    build:
+      # Context is the frontend directory
+      context: ./frontend
+      # Path to Frontend Dockerfile
+      dockerfile: Dockerfile
+    # Name and tag the image
+    image: securevault-frontend:v1.0.0
+    # Name the container 'securevault-frontend'
+    container_name: securevault-frontend
+    # Open port 8080 on your computer so you can open http://localhost:8080 in your browser
+    ports:
+      - "8080:8080"
+    # Connect to the 'securevault' network
+    networks:
+      - securevault
+    # Wait for all backend microservices to start before running frontend
+    depends_on:
+      - auth
+      - notes
+      - tasks
+    # Automatically restart if it stops
+    restart: unless-stopped

@@ -1,0 +1,12 @@
+name: or-condition
+on: push
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checking-actor
+        if: github.actor == 'rayyan' || github.actor == 'rayyankhan-devops'
+        run: |
+          echo "the owner of this repo is ${{ github.actor }}"
+      
+      

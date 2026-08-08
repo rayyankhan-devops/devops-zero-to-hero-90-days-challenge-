@@ -1,12 +1,12 @@
 # 🚀 DevOps Zero to Hero: 90 Days Challenge
 
-Welcome to my **DevOps Zero to Hero 90 Days Challenge** repository! This challenge is a committed journey to master DevOps engineering from the ground up. Over 90 days, I am learning, building, and deploying real-world systems, cloud infrastructure, automation pipelines, and modern DevOps tools.
+Welcome to my **DevOps Zero to Hero 90 Days Challenge** repository! This challenge is a committed journey to master DevOps engineering from the ground up. Over 90 days, I am learning, building, and deploying real-world systems, cloud infrastructure, automation pipelines, DevSecOps hardening, and modern DevOps tools.
 
 ---
 
 ## 📅 Challenge Roadmap
 
-Below is the structured path of the 90 Days DevOps Challenge. Active days are linked directly to their respective workspace folders containing in-depth concepts, commands, and walkthroughs.
+Below is the structured path of the 90 Days DevOps Challenge. Active days are linked directly to their respective workspace folders containing in-depth concepts, commands, hands-on project codebases, and walkthroughs.
 
 | Day | Topic / Focus | Status |
 | :---: | :--- | :---: |
@@ -32,7 +32,10 @@ Below is the structured path of the 90 Days DevOps Challenge. Active days are li
 | **Day 20** | [Dockerizing a 3-Tier Microservices Application & Docker Scout](day-20-3tier-docker-scout/README.md) | ✅ Completed |
 | **Day 21** | [Dockerfiles & Best Practices (ChatApp & Go-MariaDB Projects)](day-21-dockerfiles-best-practices/README.md) | ✅ Completed |
 | **Day 22** | [Docker Compose & Microservices Stack (DevBoard Project)](day-22-docker-compose-devboard/README.md) | ✅ Completed |
-| **Day 23-90** | Orchestration (Kubernetes, Helm), CI/CD (GitHub Actions, Jenkins), IaC (Terraform), Configuration Management (Ansible), Monitoring (Prometheus & Grafana), and Cloud Native Projects. | ⏳ Upcoming |
+| **Day 23** | [DevSecOps: Hardening, Optimizing & Securing SecureVault](day-23-devsecops-securevault/README.md) | ✅ Completed |
+| **Day 24** | [GitHub Actions Deep Dive & Hardening Docker Images](day-24-gha-docker-hardening/README.md) | ✅ Completed |
+| **Day 25** | [End-to-End Automated CI/CD & Self-Hosted Deployment for DevBoard](day-25-cicd-self-hosted-runner-devboard/README.md) | ✅ Completed |
+| **Day 26-90** | Orchestration (Kubernetes, Helm), IaC (Terraform), Configuration Management (Ansible), Monitoring (Prometheus & Grafana), and Cloud Native Projects. | ⏳ Upcoming |
 
 ---
 
@@ -77,10 +80,14 @@ devops-zero-to-hero-90-days-challenge/
 ├── day-19-docker-volumes-networking/    # Day 19: Docker Storage Volumes & Custom Networking
 ├── day-20-3tier-docker-scout/           # Day 20: 3-Tier Microservices Containerization & Scout
 ├── day-21-dockerfiles-best-practices/   # Day 21: Dockerfile Optimization & Hands-on Projects
-│   ├── chatApp-go-with-react-postgres/  # WebSocket Chat app microservice stack
-│   └── go-with-maria-db/                # Go microservice with MariaDB
-└── day-22-docker-compose-devboard/      # Day 22: Docker Compose & Microservices
-    └── devboard/                        # DevBoard Stack (Nginx, React, Go API, Postgres)
+├── day-22-docker-compose-devboard/      # Day 22: Docker Compose & Microservices
+├── day-23-devsecops-securevault/        # Day 23: DevSecOps SecureVault Hardening & Optimization
+│   └── SecretVault-devsecops/           # Microservices stack (Auth, Notes, Tasks, Postgres)
+├── day-24-gha-docker-hardening/         # Day 24: GitHub Actions Deep Dive & Docker Hardening
+│   ├── GHA/                             # GitHub Actions workflow contexts repo
+│   └── meme-generator/                  # Production-ready Meme Generator SPA
+└── day-25-cicd-self-hosted-runner-devboard/ # Day 25: Automated CI/CD & Self-Hosted EC2 Runner
+    └── devboard/                        # DevBoard CI/CD stack (.github/workflows & Compose)
 ```
 
 ---

@@ -1,0 +1,13 @@
+name: lintcheck
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  lint-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      

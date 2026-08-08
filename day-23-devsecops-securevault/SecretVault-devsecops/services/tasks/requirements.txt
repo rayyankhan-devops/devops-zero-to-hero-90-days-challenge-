@@ -1,0 +1,12 @@
+Flask>=3.1.0
+Flask-Cors>=6.0.0
+Flask-SQLAlchemy>=3.1.1
+PyJWT>=2.10.1
+SQLAlchemy>=2.0.38
+Werkzeug>=3.1.6
+gunicorn>=23.0.0
+psycopg[binary]>=3.2.5
+python-dotenv>=1.2.2
+msgpack>=1.2.1
+setuptools>=83.0.0
+

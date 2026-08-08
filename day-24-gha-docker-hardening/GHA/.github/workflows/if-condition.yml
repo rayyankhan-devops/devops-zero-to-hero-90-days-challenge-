@@ -1,0 +1,15 @@
+name: id-demo
+on: 
+  push:
+    branches:
+      - main
+      - dev
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: run if branch is main
+        if: github.actor == 'rayyankhan-devops'
+        run: echo "Running this step"
+      - name: running the step directly
+        run: echo "Meow Meow run directly"        

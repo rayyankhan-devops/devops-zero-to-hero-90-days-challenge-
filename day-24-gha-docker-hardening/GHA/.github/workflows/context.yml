@@ -1,0 +1,16 @@
+name: Context-demo
+on: push
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo the context
+        run: |
+          echo "This workflow is runned by ${{ github.actor }}"
+          echo "This repository name is ${{ github.repository }}"
+      - name: Echo the all context
+        run: |
+          echo "${{ toJson(github) }}"
+      - name: Echo the Env Sha
+        run: |
+          echo "$GITHUB_SHA"

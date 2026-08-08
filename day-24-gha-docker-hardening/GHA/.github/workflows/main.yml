@@ -1,0 +1,24 @@
+name: gha-demo
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - feature/pr-demo
+      - release/**'
+  pull_request:
+    branches:
+      - main
+      - develop
+      - feature/pr-demo
+      - release/**'
+
+jobs:
+  action-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout the code
+        uses: actions/checkout@v4
+      - name: print index.html file
+        run: cat index.html
