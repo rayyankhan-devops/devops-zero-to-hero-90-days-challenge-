@@ -1,0 +1,30 @@
+name: day19-volumes-network
+
+services:
+  web-app:
+    image: nginx:alpine
+    container_name: web_app_container
+    ports:
+      - "8080:80"
+    volumes:
+      - app_logs:/var/log/nginx
+    networks:
+      - isolated_net
+
+  database:
+    image: postgres:17-alpine
+    container_name: postgres_db_container
+    environment:
+      POSTGRES_PASSWORD: devpassword
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - isolated_net
+
+networks:
+  isolated_net:
+    driver: bridge
+
+volumes:
+  app_logs:
+  postgres_data:

@@ -1,0 +1,26 @@
+{
+  "sprint": "Sprint 1 - Cloud Hardening & Containerization",
+  "issues": [
+    {
+      "key": "DEV-101",
+      "summary": "Write hardened Alpine multi-stage Dockerfile for Go service",
+      "type": "Task",
+      "story_points": 3,
+      "status": "Done"
+    },
+    {
+      "key": "DEV-102",
+      "summary": "Configure Nginx reverse proxy with security headers",
+      "type": "Task",
+      "story_points": 5,
+      "status": "In Progress"
+    },
+    {
+      "key": "DEV-103",
+      "summary": "Fix PostgreSQL database connection leak on high load",
+      "type": "Bug",
+      "story_points": 8,
+      "status": "To Do"
+    }
+  ]
+}

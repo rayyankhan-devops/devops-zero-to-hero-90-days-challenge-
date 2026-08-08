@@ -1,72 +1,56 @@
 # ☁️ Day 10: Git Advanced, AWS Cloud Fundamentals & Python OOP
 
-On Day 10, I covered advanced Git merge/rebase workflows, foundational AWS Cloud architecture models, identity management (IAM), pricing models, and Object-Oriented Programming (OOP) in Python.
+Welcome to Day 10 of the **DevOps 90 Days Challenge**! Today's focus is on mastering advanced Git techniques, understanding core AWS cloud computing concepts, and building object-oriented Python log analyzers.
 
 ---
 
-## 📝 Day 10 Notes (Visual)
+## 📝 Day 10 Visual Notes
 ![Day 10 Notes](day-10-notes.png)
 
 ---
 
 > [!NOTE]
-> **Day 10 Summary (Social Media Caption):**
-> Day 10 of my 90 Days of DevOps challenge is officially in the books! Today's focus was all about advancing Git strategies, understanding AWS cloud deployment models, and writing object-oriented Python log analyzer engines.
-> 
-> **Key Learnings:**
-> * **🔀 Git Merge vs. Rebase:** Mastered Merge commits vs linear Fast-Forward Rebase commits.
-> * **☁️ AWS Fundamentals:** Explored Regions, Availability Zones (AZs), CapEx vs OpEx, and IaaS / PaaS / SaaS models.
-> * **🔐 IAM Security:** IAM Users, Groups, Roles, Policies, and Root user security.
-> * **🐍 Python OOP:** Built an object-oriented `LogAnalyzer` class to process server logs.
+> **Day 10 Summary:**
+> * **🔀 Git Merge vs Rebase:** Learned when to keep commit history branching vs making history a clean straight line.
+> * **☁️ AWS Cloud Models:** Explored Public/Private/Hybrid clouds, Regions, Availability Zones, and CapEx vs OpEx.
+> * **🔐 IAM Basics:** Understood root user safety, IAM users, groups, roles, and policies.
+> * **🐍 Python OOP:** Created a reusable `LogAnalyzer` class to process server logs.
 
 ---
 
-## 1. Advanced Git Workflows
+## 1. Advanced Git: Merge vs. Rebase
 
-### Merge vs. Rebase Comparison
+### Quick Rule of Thumb:
+* **Use `git merge`** when combining team features into public branches (`main`). It preserves full history.
+* **Use `git rebase`** when updating your personal feature branch with the latest `main` changes before opening a Pull Request. It creates a clean linear history.
 
-| Feature | `git merge` | `git rebase` |
-| :--- | :--- | :--- |
-| **History Preservation** | Preserves full history with a dedicated merge commit. | Rewrites commit history linearly onto the target branch. |
-| **Best Used For** | Public shared team branches (e.g. `main`). | Private feature branches before creating a Pull Request. |
-| **Commands** | `git checkout main && git merge feature` | `git checkout feature && git rebase main` |
-
----
-
-## 2. Cloud Computing & AWS Infrastructure
-
-* **Public Cloud:** Infrastructure owned and managed by third-party cloud providers (AWS, Azure, GCP).
-* **Private Cloud:** Cloud infrastructure dedicated strictly to a single organization (VMware, OpenStack).
-* **Hybrid Cloud:** A combination of private infrastructure and public cloud resources.
-
-### CapEx vs. OpEx Financial Models
-* **CapEx (Capital Expenditure):** High upfront investment purchasing physical hardware, servers, and datacenter real estate. Requires ongoing maintenance.
-* **OpEx (Operational Expenditure):** Pay-as-you-go cloud model. Low upfront cost; expenses scale dynamically with actual usage.
-
----
-
-## 3. Python OOP (Object-Oriented Programming)
-
-OOP allows organizing code into blueprints (**Classes**) and instances (**Objects**).
-
-```python
-class Server:
-    def __init__(self, name, ip):
-        self.name = name
-        self.ip = ip
-
-server1 = Server("web-prod-01", "192.168.1.50")
-print(server1.name)
+```bash
+# Example: Rebase your feature branch onto main
+git checkout feature-branch
+git rebase main
 ```
 
 ---
 
-## 🛠️ Executable Practice Script
+## 2. AWS Cloud Fundamentals
 
-* **Python OOP Log Analyzer:** [log_analyzer_oop.py](log_analyzer_oop.py)
+* **IaaS (Infrastructure as a Service):** You manage OS and apps; AWS manages hardware (e.g., Amazon EC2).
+* **PaaS (Platform as a Service):** AWS manages OS and runtime; you only provide code (e.g., AWS Elastic Beanstalk).
+* **SaaS (Software as a Service):** Fully managed web software (e.g., Gmail, MS 365).
 
+### CapEx vs. OpEx
+* **CapEx (Capital Expenditure):** Buying physical servers upfront. High initial cost.
+* **OpEx (Operational Expenditure):** Pay-as-you-go cloud billing. Pay only for what you run.
+
+---
+
+## 3. Files in This Folder
+
+- 📄 [aws_iam_policy.json](aws_iam_policy.json): Sample JSON policy granting S3 and EC2 permissions.
+- 🐍 [log_analyzer_oop.py](log_analyzer_oop.py): Python OOP script parsing server log metrics.
+
+### Run the Python Log Analyzer:
 ```bash
-chmod +x log_analyzer_oop.py
 python3 log_analyzer_oop.py
 ```
 

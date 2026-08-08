@@ -1,60 +1,48 @@
 # ⚡ Day 12: Advanced Git & AWS EC2, IAM and S3
 
-On Day 12, I explored advanced Git manipulation tools (`git reset`, `git revert`, `git cherry-pick`, `git stash`, `git blame`, Git hooks) and core AWS compute (EC2), identity access controls (IAM), and Object Storage (S3).
+Welcome to Day 12! Today's focus is on mastering powerful Git troubleshooting commands and launching AWS core services (EC2, IAM roles, S3 buckets).
 
 ---
 
-## 📝 Day 12 Notes (Visual)
+## 📝 Day 12 Visual Notes
 ![Day 12 Notes](day-12-notes.png)
 
 ---
 
 > [!NOTE]
-> **Day 10 Summary (Social Media Caption):**
-> Day 12 of my 90 Days of DevOps challenge is complete! Understanding advanced Git commands and AWS foundational services is essential for managing production infrastructure.
-> 
-> **Key Topics:**
-> * **🔀 Git Reset Modes:** `--soft`, `--mixed`, and `--hard` reset differences.
-> * **📍 Git Commands:** `git cherry-pick`, `git stash`, `git revert`, `git blame`, and Git Hooks.
-> * **☁️ AWS EC2 & IAM:** Launched EC2 instances via SSH, managed IAM Users, Groups, Roles, Policies.
-> * **📦 Amazon S3:** Executed CLI commands (`aws s3 mb`, `aws s3 cp`, `aws s3 ls`, `aws s3 rm`).
+> **Day 12 Summary:**
+> * **🔀 Git Reset Commands:** `--soft` (keeps staged changes), `--mixed` (unstages changes), `--hard` (deletes changes).
+> * **📍 Useful Git Tools:** `git stash` (save work temporarily), `git blame` (see who edited a line), `git cherry-pick` (grab one specific commit).
+> * **☁️ AWS EC2 & IAM:** Launched Linux EC2 instances via SSH, managed IAM user roles and permissions.
+> * **📦 Amazon S3:** Practiced S3 file uploads and bucket management using AWS CLI.
 
 ---
 
-## 1. Git Reset Comparison Matrix
-
-| Reset Flag | Staging Area (Index) | Working Directory | History (HEAD) |
-| :--- | :--- | :--- | :--- |
-| **`git reset --soft HEAD~1`** | **Kept** (Staged) | **Kept** (Unchanged) | Moved back |
-| **`git reset --mixed HEAD~1`** | **Unstaged** | **Kept** (Unchanged) | Moved back |
-| **`git reset --hard HEAD~1`** | **Destroyed** | **Destroyed** | Moved back |
-
----
-
-## 2. AWS S3 CLI Quick Reference
+## 1. Useful AWS S3 CLI Commands
 
 ```bash
-# Create Bucket
-aws s3 mb s3://rayyan-devops-bucket-2026
+# Create a new bucket
+aws s3 mb s3://my-unique-devops-bucket
 
-# Upload File
-aws s3 cp app.log s3://rayyan-devops-bucket-2026/
+# Upload a file to S3
+aws s3 cp index.html s3://my-unique-devops-bucket/
 
-# List Bucket Contents
-aws s3 ls s3://rayyan-devops-bucket-2026/
-
-# Remove File
-aws s3 rm s3://rayyan-devops-bucket-2026/app.log
+# List files in bucket
+aws s3 ls s3://my-unique-devops-bucket/
 ```
 
 ---
 
-## 🛠️ Executable Practice Script
+## 2. Files in This Folder
 
-* **AWS EC2 & S3 Manager Script:** [ec2_s3_manager.py](ec2_s3_manager.py)
+- 🐍 [ec2_s3_manager.py](ec2_s3_manager.py): Python script auditing EC2 instances and S3 buckets.
+- 📄 [s3_bucket_policy.json](s3_bucket_policy.json): Example public read S3 bucket policy.
+- 📜 [git_hooks_setup.sh](git_hooks_setup.sh): Script that installs a pre-commit hook to block secret files.
 
+### Run the Scripts:
 ```bash
-chmod +x ec2_s3_manager.py
+chmod +x git_hooks_setup.sh ec2_s3_manager.py
+./git_hooks_setup.sh
 python3 ec2_s3_manager.py
 ```
 
@@ -65,4 +53,4 @@ python3 ec2_s3_manager.py
 
 ---
 
-* [← Day 11: DevSecOps & Security](../day-11-devsecops-github-security/README.md) | [Home](../README.md)
+* [← Day 11: DevSecOps Security](../day-11-devsecops-github-security/README.md) | [Home](../README.md)

@@ -1,0 +1,11 @@
+title = "Gitleaks Custom Security Scanning Rules"
+
+[[rules]]
+description = "AWS Access Key ID"
+regex = '''(A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}'''
+tags = ["key", "AWS"]
+
+[[rules]]
+description = "Generic Private Key"
+regex = '''-----BEGIN PRIVATE KEY-----'''
+tags = ["key", "SSH"]

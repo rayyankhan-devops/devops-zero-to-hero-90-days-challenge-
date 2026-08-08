@@ -1,0 +1,29 @@
+name: Self-Hosted AWS EC2 Deployment Pipeline
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.set-sha.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate Commit SHA Tag
+        id: set-sha
+        run: echo "sha=${{ github.sha }}" >> $GITHUB_OUTPUT
+
+  deploy-ec2:
+    needs: test-and-build
+    runs-on: self-hosted
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Deploy Production Stack via Docker Compose
+        env:
+          IMAGE_TAG: ${{ needs.test-and-build.outputs.image_tag }}
+        run: |
+          echo "[EC2 CD] Deploying image tag: $IMAGE_TAG"
+          docker compose -f docker-compose.prod.yml up -d --build

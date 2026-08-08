@@ -1,0 +1,40 @@
+name: day23-securevault-hardened
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: securevault_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: vaultuser
+      POSTGRES_PASSWORD: vaultpassword
+      POSTGRES_DB: vaultdb
+    volumes:
+      - vault_pgdata:/var/lib/postgresql/data
+    networks:
+      - securevault_net
+
+  auth-service:
+    build: ./SecretVault-devsecops/services/auth
+    container_name: securevault_auth
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://vaultuser:vaultpassword@postgres:5432/vaultdb
+    networks:
+      - securevault_net
+
+  gateway:
+    build: ./SecretVault-devsecops/frontend
+    container_name: securevault_gateway
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    networks:
+      - securevault_net
+
+networks:
+  securevault_net:
+    driver: bridge
+
+volumes:
+  vault_pgdata:

@@ -1,0 +1,3 @@
+# Trivy Vulnerability Exclusions List
+# CVE-YYYY-XXXX (Reason: False positive or accepted risk)
+CVE-2023-99999

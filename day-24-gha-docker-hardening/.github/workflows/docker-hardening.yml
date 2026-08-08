@@ -1,0 +1,26 @@
+name: Docker Security Hardening & GHA Workflow
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-and-scan:
+    name: Build & Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Build Hardened Docker Image
+        run: |
+          docker build -t meme-generator:hardened -f meme-generator/Dockerfile .
+
+      - name: Scan Image with Trivy (Zero Critical/High Target)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'meme-generator:hardened'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL,HIGH'

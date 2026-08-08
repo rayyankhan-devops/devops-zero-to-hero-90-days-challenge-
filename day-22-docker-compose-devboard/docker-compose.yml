@@ -1,0 +1,56 @@
+name: day22-devboard-stack
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: devboard_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: devboard
+      POSTGRES_PASSWORD: devboardpassword
+      POSTGRES_DB: devboard
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U devboard -d devboard"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - devboard_net
+
+  backend:
+    build: ./devboard/backend
+    container_name: devboard_backend
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    environment:
+      PORT: "8080"
+      POSTGRES_URL: "postgres://devboard:devboardpassword@postgres:5432/devboard?sslmode=disable"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - devboard_net
+
+  frontend:
+    build: ./devboard/frontend
+    container_name: devboard_frontend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - devboard_net
+
+networks:
+  devboard_net:
+    driver: bridge
+
+volumes:
+  pgdata:

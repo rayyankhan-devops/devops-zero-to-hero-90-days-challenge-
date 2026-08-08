@@ -1,48 +1,50 @@
 # 🛡️ Day 11: DevSecOps Fundamentals, OWASP Threat Dragon & GitHub Security
 
-On Day 11, I focused on integrating security into every phase of the software development lifecycle (Shift-Left DevSecOps), threat modeling, Gitleaks secret detection, Trivy vulnerability scanning, and GitHub Secrets vs. Environment Variables.
+Welcome to Day 11! Today's goal is **Shift-Left Security**—finding security risks early in development before code reaches production.
 
 ---
 
-## 📝 Day 11 Notes (Visual)
+## 📝 Day 11 Visual Notes
 ![Day 11 Notes](day-11-notes.png)
 
 ---
 
 > [!NOTE]
-> **Day 11 Summary (Social Media Caption):**
-> Day 11 of my 90 Days of DevOps challenge is complete! Security isn't a feature you add at the end—it's a mindset that starts on Day 1.
-> 
-> **Key Takeaways:**
-> * **🛡️ DevSecOps & Threat Modeling:** Mastered OWASP Threat Dragon and Shift-Left principles.
-> * **🔍 Secrets Scanning:** Configured Gitleaks to detect hardcoded API keys and DB credentials.
-> * **📦 Vulnerability Scanning:** Utilized Trivy to scan filesystems, container images, and IaC templates.
-> * **🔐 GitHub Secrets vs. Env Vars:** Managed sensitive credentials in CI/CD pipelines safely.
+> **Day 11 Summary:**
+> * **🛡️ What is DevSecOps?** Security integrated into every phase: Develop -> Secure -> Operate -> Deliver.
+> * **🔍 Gitleaks:** Tool that scans your Git commits to catch leaked passwords and AWS API keys.
+> * **📦 Trivy:** Vulnerability scanner for filesystems, libraries, and Docker container images.
+> * **🔐 GitHub Secrets:** Storing passwords safely in CI/CD without leaking them in plain text.
 
 ---
 
-## 1. What is DevSecOps?
+## 1. Secrets Security & `.gitignore`
 
-DevSecOps embeds security testing directly into software development pipelines rather than leaving audit reviews until post-deployment.
+Never commit passwords or API keys! Always use `.env` files for local development and keep `.env` inside `.gitignore`.
 
-`Develop -> Secure (SAST/SCA) -> Operate -> Deliver`
+```bash
+# Example .gitignore entry
+.env
+node_modules/
+*.log
+```
 
 ---
 
 ## 2. GitHub Secrets vs. Environment Variables
 
-| Feature | GitHub Secrets | GitHub Environment Variables |
-| :--- | :--- | :--- |
-| **Visibility** | Encrypted & Masked in build logs (`***`). | Plain text visible in console logs. |
-| **Purpose** | API Keys, DB Passwords, Cloud Credentials. | Non-sensitive configs (`APP_ENV=prod`, `PORT=8080`). |
-| **Usage** | `${{ secrets.AWS_ACCESS_KEY_ID }}` | `${{ vars.ENVIRONMENT_NAME }}` |
+* **GitHub Secrets:** Used for sensitive tokens (AWS keys, DB passwords). Masked in logs (`***`).
+* **Environment Variables:** Used for non-sensitive values (Port number, `APP_ENV=production`).
 
 ---
 
-## 🛠️ Executable Practice Script
+## 3. Files in This Folder
 
-* **DevSecOps Security Scanner:** [security_scanner.sh](security_scanner.sh)
+- 📜 [security_scanner.sh](security_scanner.sh): Shell script that runs Gitleaks and Trivy checks.
+- ⚙️ [gitleaks.toml](gitleaks.toml): Custom Gitleaks security scan rule config.
+- 📄 [.env.example](.env.example): Template showing how to format local environment variables.
 
+### Run the Security Scanner:
 ```bash
 chmod +x security_scanner.sh
 ./security_scanner.sh
